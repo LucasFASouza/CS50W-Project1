@@ -25,7 +25,7 @@ def search(request):
 def page(request, page_name):
     return render(request, "encyclopedia/page.html", {
         "page_name": page_name,
-        "page_content": util.get_entry(page_name)
+        "page_content": util.convert_to_html(util.get_entry(page_name))
     })
 
 
