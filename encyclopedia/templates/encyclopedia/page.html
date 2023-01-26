@@ -1,0 +1,24 @@
+{% extends "encyclopedia/layout.html" %}
+
+    {% block title %}
+        {% if page_content != none %}
+            {{ page_name }}
+        {% else %}
+            Page not found
+        {% endif %} 
+    {% endblock %}
+
+
+    {% block body %}
+        {% if page_content != none %}
+            <h1>{{ page_name }}</h1>
+
+            <ul>
+                <li>{{ page_content }}</li>
+            </ul>
+        {% else %}
+            <h1>Page not found</h1>
+            <p>Sorry, but the page you are looking for does not exist.</p>
+        {% endif %}
+
+    {% endblock %}
