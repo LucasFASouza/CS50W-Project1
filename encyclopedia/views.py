@@ -65,6 +65,27 @@ def new(request):
     })
 
 
+def edit(request, name):
+    if request.method == "POST":
+        form = NewPageForm(request.POST)
+        if form.is_valid():
+            new_content = form.cleaned_data['content']
+            with open(f'entries/{name}.md', 'w') as f:
+                file = File(f)
+                file.write(new_content)
+            return redirect("page", page_name=name)
+    else:
+        existing_content = util.get_entry(name)
+        form = NewPageForm({
+            'title': name,
+            'content': existing_content,
+        })
+    return render(request, 'encyclopedia/edit.html', {
+        'form': form,
+        'title': name
+    })
+
+
 def random(request):
     rand = choice(util.list_entries())
     return redirect("page", page_name=rand)
